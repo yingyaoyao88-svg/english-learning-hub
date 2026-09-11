@@ -1,0 +1,4 @@
+import { getAdmin } from "@/lib/auth/admin";
+import { updateResource } from "@/lib/resources/repository";
+import { resourcePatchSchema } from "@/lib/resources/schema";
+export async function PATCH(request:Request,{params}:{params:Promise<{id:string}>}) { if(!await getAdmin()) return Response.json({error:"UNAUTHORIZED"},{status:401}); const body=await request.json() as {action?:string;patch?:unknown}; if(!["publish","reject","edit"].includes(body.action??"")) return Response.json({error:"INVALID_ACTION"},{status:400}); const {id}=await params; const patch=body.action==="edit"?resourcePatchSchema.safeParse(body.patch):null; if(patch&&!patch.success)return Response.json({error:"INVALID_PATCH"},{status:400}); const status=body.action==="publish"?"published":body.action==="reject"?"rejected":"pending"; const resource=await updateResource(id,status,patch?.success?patch.data:{}); return resource?Response.json({resource}):Response.json({error:"NOT_FOUND"},{status:404}); }

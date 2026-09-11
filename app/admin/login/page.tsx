@@ -1,0 +1,3 @@
+import { chatGPTSignInPath } from "@/app/chatgpt-auth";
+import { SiteHeader } from "@/components/site-header";
+export default function AdminLogin() { return <main className="min-h-screen"><SiteHeader/><section className="mx-auto max-w-lg px-5 py-20 text-center"><div className="rounded-[2rem] border border-border bg-card p-9 shadow-[var(--shadow-soft)]"><p className="text-sm font-bold text-accent">管理员区域</p><h1 className="font-editorial mt-2 text-4xl">审核资源投稿</h1><p className="mt-4 leading-7 text-muted-foreground">使用已授权的 ChatGPT 账号登录后继续。</p><a href={chatGPTSignInPath("/admin")} target="_top" className="mt-7 inline-flex rounded-xl bg-primary px-5 py-3 font-bold text-primary-foreground">使用 ChatGPT 登录</a></div></section></main>; }

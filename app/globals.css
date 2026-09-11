@@ -1,0 +1,38 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "../vendor/shadcn-tailwind-4.13.0.css";
+
+:root {
+  --background: #f7f3e9; --foreground: #143f36; --card: #fffdf7; --card-foreground: #143f36;
+  --popover: #fffdf7; --popover-foreground: #143f36; --primary: #174f42; --primary-foreground: #fffdf7;
+  --secondary: #e7eee8; --secondary-foreground: #174f42; --muted: #eeeae0; --muted-foreground: #65766f;
+  --accent: #ff8a3d; --accent-foreground: #21372f; --accent-deep: #cc5b20; --destructive: #b5382d;
+  --border: #d8d6c9; --input: #d8d6c9; --ring: #267966; --forest: #174f42; --forest-soft: #267966;
+  --sky-wash: #dbece9; --focus-halo: rgb(38 121 102 / 16%); --shadow-soft: 0 22px 55px rgb(20 63 54 / 9%); --radius: .9rem;
+}
+
+@theme inline {
+  --color-background: var(--background); --color-foreground: var(--foreground); --color-card: var(--card); --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover); --color-popover-foreground: var(--popover-foreground); --color-primary: var(--primary); --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary); --color-secondary-foreground: var(--secondary-foreground); --color-muted: var(--muted); --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent); --color-accent-foreground: var(--accent-foreground); --color-destructive: var(--destructive); --color-border: var(--border); --color-input: var(--input); --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px); --radius-md: calc(var(--radius) - 2px); --radius-lg: var(--radius); --radius-xl: calc(var(--radius) + 6px);
+  --font-sans: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--background); color: var(--foreground); font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
+a, button, input { outline-offset: 3px; }
+.font-editorial { font-family: Georgia, "Noto Serif SC", "Songti SC", serif; font-weight: 700; }
+.hero-grid { background-color: var(--card); background-image: radial-gradient(circle at 86% 18%, rgb(255 138 61 / 16%) 0 6rem, transparent 6.1rem), linear-gradient(135deg, transparent 55%, rgb(23 79 66 / 4%) 55% 56%, transparent 56%); }
+.category-pill { min-height: 2.45rem; border: 1px solid var(--border); border-radius: 999px; background: rgb(255 253 247 / 82%); padding: .55rem .9rem; color: var(--muted-foreground); font-size: .875rem; font-weight: 650; transition: .18s ease; }
+.category-pill:hover { border-color: var(--forest-soft); color: var(--forest); transform: translateY(-1px); }
+.category-pill-active { border-color: var(--forest); background: var(--forest); color: white; }
+.resource-card { border: 1px solid var(--border); border-radius: 1.5rem; background: var(--card); padding: 1.5rem; box-shadow: 0 10px 32px rgb(20 63 54 / 7%); transition: transform .2s ease, box-shadow .2s ease; }
+.resource-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-soft); }
+.price-chip { border-radius: 999px; background: #e1f0de; padding: .38rem .7rem; color: #28653b; font-size: .75rem; font-weight: 800; }
+.visit-link { display: inline-flex; align-items: center; gap: .4rem; color: var(--forest); font-size: .9rem; font-weight: 800; text-decoration: none; }
+.visit-link:hover { color: var(--accent-deep); }
+@media (max-width: 640px) { .hero-grid { background-image: radial-gradient(circle at 92% 9%, rgb(255 138 61 / 14%) 0 4rem, transparent 4.1rem); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
