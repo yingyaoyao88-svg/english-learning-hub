@@ -10,7 +10,7 @@ const categoryLabel = Object.fromEntries(categories) as Record<ResourceCategory 
 
 export function ResourceDirectory({ resources }: { resources: Resource[] }) {
   const [allResources, setAllResources] = useState(resources); const [query, setQuery] = useState(""); const [category, setCategory] = useState<ResourceCategory | "all">("all"); const [level, setLevel] = useState<ResourceLevel | "all">("all"); const [price, setPrice] = useState<PriceType | "all">("all"); const [showFilters, setShowFilters] = useState(false); const [expandedResourceId, setExpandedResourceId] = useState<string | null>(null);
-  useEffect(() => { fetch("/api/resources").then((response)=>response.json()).then((data:{resources?:Resource[]})=>{ if(data.resources?.length) setAllResources([...resources, ...data.resources.filter((item)=>!resources.some((base)=>base.normalizedUrl===item.normalizedUrl))]); }).catch(()=>undefined); }, [resources]);
+  useEffect(() => { fetch("/api/resources").then(async (response)=>(await response.json()) as {resources?:Resource[]}).then((data)=>{ if(data.resources?.length) setAllResources([...resources, ...data.resources.filter((item)=>!resources.some((base)=>base.normalizedUrl===item.normalizedUrl))]); }).catch(()=>undefined); }, [resources]);
   const filtered = useMemo(() => filterResources(allResources, { query, category, level, price }), [allResources, query, category, level, price]);
   useEffect(() => { setExpandedResourceId(null); }, [query, category, level, price]);
   const clear = () => { setQuery(""); setCategory("all"); setLevel("all"); setPrice("all"); };
