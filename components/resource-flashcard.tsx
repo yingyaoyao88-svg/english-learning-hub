@@ -1,5 +1,4 @@
 import { ArrowUpRight } from "lucide-react";
-import type { KeyboardEventHandler } from "react";
 import type { Resource } from "@/lib/resources/types";
 
 const price = { free: "免费", freemium: "部分免费", paid: "付费" };
@@ -8,18 +7,15 @@ const level = { beginner: "入门", intermediate: "中级", advanced: "高级", 
 export function ResourceFlashcard({
   resource,
   panelId,
-  onKeyDown,
 }: {
   resource: Resource;
   panelId: string;
-  onKeyDown?: KeyboardEventHandler<HTMLElement>;
 }) {
   return <aside
     id={panelId}
     role="region"
     aria-label={`${resource.name} 详情`}
     tabIndex={-1}
-    onKeyDown={onKeyDown}
     className="resource-flashcard"
   >
     <div className="flex flex-wrap items-center gap-2">

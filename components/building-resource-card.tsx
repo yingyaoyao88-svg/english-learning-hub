@@ -19,7 +19,16 @@ export function BuildingResourceCard({
   const panelId = `resource-panel-${resource.id}`;
   const theme = buildingThemeFor(resource.category, resource.id);
 
-  return <article data-testid="building-card" onClick={(event) => event.stopPropagation()} className={`building-card${expanded ? " building-card-active" : ""}`}>
+  return <article
+    data-testid="building-card"
+    onClick={(event) => event.stopPropagation()}
+    onKeyDown={(event) => {
+      if (event.key !== "Escape" || !expanded) return;
+      onToggle();
+      buttonRef.current?.focus();
+    }}
+    className={`building-card${expanded ? " building-card-active" : ""}`}
+  >
     <button
       ref={buttonRef}
       type="button"
@@ -38,14 +47,8 @@ export function BuildingResourceCard({
         <span className="price-chip">{resource.priceType === "free" ? "免费" : resource.priceType === "freemium" ? "部分免费" : "付费"}</span>
       </span>
     </button>
-    {expanded && <ResourceFlashcard
-      resource={resource}
-      panelId={panelId}
-      onKeyDown={(event) => {
-        if (event.key !== "Escape") return;
-        onToggle();
-        buttonRef.current?.focus();
-      }}
-    />}
+    {expanded && (
+      <ResourceFlashcard resource={resource} panelId={panelId}/>
+    )}
   </article>;
 }

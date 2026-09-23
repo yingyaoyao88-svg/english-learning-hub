@@ -25,7 +25,8 @@ describe("BuildingResourceCard", () => {
     const onToggle = vi.fn();
     render(<BuildingResourceCard resource={resource} expanded onToggle={onToggle} />);
     const building = screen.getByRole("button", { name: `查看 ${resource.name}` });
-    fireEvent.keyDown(screen.getByRole("region"), { key: "Escape" });
+    building.focus();
+    fireEvent.keyDown(building, { key: "Escape" });
     expect(onToggle).toHaveBeenCalledOnce();
     expect(building).toHaveFocus();
   });
