@@ -29,4 +29,10 @@ describe("BuildingResourceCard", () => {
     expect(onToggle).toHaveBeenCalledOnce();
     expect(building).toHaveFocus();
   });
+
+  it("uses the responsive building and flashcard layout hooks", () => {
+    render(<BuildingResourceCard resource={resource} expanded onToggle={() => undefined} />);
+    expect(screen.getByTestId("building-card")).toHaveClass("building-card");
+    expect(screen.getByRole("region")).toHaveClass("resource-flashcard");
+  });
 });

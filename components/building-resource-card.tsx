@@ -19,7 +19,7 @@ export function BuildingResourceCard({
   const panelId = `resource-panel-${resource.id}`;
   const theme = buildingThemeFor(resource.category, resource.id);
 
-  return <article onClick={(event) => event.stopPropagation()} className={`building-card${expanded ? " building-card-active" : ""}`}>
+  return <article data-testid="building-card" onClick={(event) => event.stopPropagation()} className={`building-card${expanded ? " building-card-active" : ""}`}>
     <button
       ref={buttonRef}
       type="button"
