@@ -55,17 +55,63 @@ function KindDetails({ kind, accent, roof }: { kind: BuildingKind; accent: strin
   return <path d="M92 104h56M104 90v28M120 82v36M136 90v28" stroke="#fff8df" strokeWidth="7" strokeLinecap="round"/>;
 }
 
+function BuildingShell({ theme }: { theme: BuildingTheme }) {
+  const line = "#173f37";
+  if (theme.variant === "wide") return <>
+    <rect x="25" y="104" width="190" height="86" rx="7" fill={theme.wall} stroke={line} strokeWidth="5"/>
+    <path d="M17 106L55 68h130l38 38-10 13-35-31H62l-35 31z" fill={theme.roof} stroke={line} strokeWidth="5" strokeLinejoin="round"/>
+    <path d="M67 68l19-31h68l20 31z" fill={theme.wall} stroke={line} strokeWidth="5"/>
+    <path d="M78 40h86l12 18H67z" fill={theme.roof} stroke={line} strokeWidth="5" strokeLinejoin="round"/>
+  </>;
+  if (theme.variant === "stepped") return <>
+    <rect x="42" y="100" width="156" height="90" rx="6" fill={theme.wall} stroke={line} strokeWidth="5"/>
+    <rect x="64" y="69" width="112" height="45" rx="5" fill={theme.wall} stroke={line} strokeWidth="5"/>
+    <path d="M52 72h136L169 43H72z" fill={theme.roof} stroke={line} strokeWidth="5" strokeLinejoin="round"/>
+    <path d="M31 104h178l-12 18H43z" fill={theme.roof} stroke={line} strokeWidth="5" strokeLinejoin="round"/>
+  </>;
+  if (theme.variant === "tower") return <>
+    <rect x="48" y="104" width="144" height="86" rx="5" fill={theme.wall} stroke={line} strokeWidth="5"/>
+    <path d="M35 108l45-43h80l45 43-11 13-40-37H86l-40 37z" fill={theme.roof} stroke={line} strokeWidth="5" strokeLinejoin="round"/>
+    <rect x="91" y="47" width="58" height="68" rx="5" fill={theme.wall} stroke={line} strokeWidth="5"/>
+    <path d="M83 50l37-31 37 31-8 11-29-23-29 23z" fill={theme.roof} stroke={line} strokeWidth="5" strokeLinejoin="round"/>
+  </>;
+  return <>
+    <path d="M38 98L120 35l82 63v92H38z" fill={theme.wall} stroke={line} strokeWidth="5" strokeLinejoin="round"/>
+    <path d="M24 104L120 24l96 80-13 13-83-68-83 68z" fill={theme.roof} stroke={line} strokeWidth="5" strokeLinejoin="round"/>
+    <rect x="174" y="43" width="18" height="50" rx="3" fill={theme.roof} stroke={line} strokeWidth="4"/>
+  </>;
+}
+
+function VariantDetails({ theme }: { theme: BuildingTheme }) {
+  if (theme.variant === "wide") return <>
+    <path d="M31 183h-13v-26h13M209 183h13v-26h-13" fill={theme.accent} stroke="#173f37" strokeWidth="4"/>
+    <path d="M20 157l5-14 5 14M210 157l6-14 5 14" fill={theme.roof}/>
+  </>;
+  if (theme.variant === "stepped") return <>
+    <path d="M28 190v-31h18v31M194 190v-31h18v31" fill={theme.wall} stroke="#173f37" strokeWidth="4"/>
+    <path d="M23 159h28l-14-19zM189 159h28l-14-19z" fill={theme.roof} stroke="#173f37" strokeWidth="4"/>
+  </>;
+  if (theme.variant === "tower") return <>
+    <circle cx="120" cy="71" r="11" fill="#fff8df" stroke="#173f37" strokeWidth="3"/>
+    <path d="M120 60v22M109 71h22" stroke={theme.accent} strokeWidth="3"/>
+  </>;
+  return <>
+    <path d="M51 189c-3-15-12-25-25-28 5 12 5 22 2 28M189 189c3-15 12-25 25-28-5 12-5 22-2 28" fill={theme.accent} stroke="#173f37" strokeWidth="3"/>
+  </>;
+}
+
 export function BuildingIllustration({ theme, active }: { theme: BuildingTheme; active: boolean }) {
   return <svg
     viewBox="0 0 240 220"
     role="img"
     aria-label={labels[theme.kind]}
     data-lit={String(active)}
+    data-variant={theme.variant}
     className="building-illustration"
   >
     <ellipse cx="120" cy="202" rx="94" ry="12" fill="#174f42" opacity=".12"/>
-    <path d="M38 98L120 35l82 63v92H38z" fill={theme.wall} stroke="#173f37" strokeWidth="5" strokeLinejoin="round"/>
-    <path d="M24 104L120 24l96 80-13 13-83-68-83 68z" fill={theme.roof} stroke="#173f37" strokeWidth="5" strokeLinejoin="round"/>
+    <BuildingShell theme={theme}/>
+    <VariantDetails theme={theme}/>
     <KindDetails kind={theme.kind} accent={theme.accent} roof={theme.roof}/>
     <rect className="building-window" x="58" y="132" width="39" height="35" rx="6" fill={active ? theme.accent : "#dbece9"} stroke="#173f37" strokeWidth="4"/>
     <path d="M77.5 133v33M59 149.5h37" stroke="#173f37" strokeWidth="3"/>

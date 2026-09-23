@@ -14,6 +14,7 @@ export type BuildingKind =
 
 export type BuildingTheme = {
   kind: BuildingKind;
+  variant: "cottage" | "wide" | "stepped" | "tower";
   wall: string;
   roof: string;
   accent: string;
@@ -38,6 +39,8 @@ const palettes = [
   { wall: "#d9d2ee", roof: "#68558f", accent: "#ffd46b" },
 ] as const;
 
+const variants = ["cottage", "wide", "stepped", "tower"] as const;
+
 export function buildingThemeFor(
   category: ResourceCategory | string,
   seed = "",
@@ -45,6 +48,7 @@ export function buildingThemeFor(
   const score = [...seed].reduce((sum, char) => sum + char.charCodeAt(0), 0);
   return {
     kind: kinds[category as ResourceCategory] ?? "learning-center",
+    variant: variants[score % variants.length],
     ...palettes[score % palettes.length],
   };
 }

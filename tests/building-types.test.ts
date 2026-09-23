@@ -18,4 +18,12 @@ describe("buildingThemeFor", () => {
       buildingThemeFor("reading", "gutenberg"),
     );
   });
+
+  it("uses the seed to choose one of four stable silhouette variants", () => {
+    expect(buildingThemeFor("reading", "gutenberg").variant).toBe("tower");
+    expect(buildingThemeFor("reading", "standard-ebooks").variant).toBe("wide");
+    expect(buildingThemeFor("reading", "gutenberg").variant).toBe(
+      buildingThemeFor("reading", "gutenberg").variant,
+    );
+  });
 });

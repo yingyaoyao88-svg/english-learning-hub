@@ -16,4 +16,9 @@ describe("BuildingIllustration", () => {
     render(<BuildingIllustration theme={buildingThemeFor("listening")} active />);
     expect(screen.getByLabelText("钟楼建筑")).toHaveAttribute("data-lit", "true");
   });
+
+  it("exposes the selected silhouette variant for stable visual rendering", () => {
+    const { container } = render(<BuildingIllustration theme={buildingThemeFor("reading", "gutenberg")} active={false} />);
+    expect(container.querySelector('[aria-label="书店建筑"]')).toHaveAttribute("data-variant", "tower");
+  });
 });
