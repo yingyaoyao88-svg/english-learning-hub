@@ -6,7 +6,7 @@ import { curatedResources } from "@/lib/resources/catalog";
 vi.stubGlobal("fetch", vi.fn(() => Promise.reject(new Error("offline"))));
 afterEach(cleanup);
 
-describe("ResourceDirectory building interactions", () => {
+describe("ResourceDirectory spatial interactions", () => {
   it("keeps only the most recently selected website open", () => {
     render(<ResourceDirectory resources={curatedResources.slice(0, 2)} />);
     fireEvent.click(screen.getByRole("button", { name: "查看 BBC Learning English" }));
@@ -25,7 +25,7 @@ describe("ResourceDirectory building interactions", () => {
   it("closes the selected website when the grid background is clicked", () => {
     render(<ResourceDirectory resources={curatedResources.slice(0, 1)} />);
     fireEvent.click(screen.getByRole("button", { name: "查看 BBC Learning English" }));
-    fireEvent.click(screen.getByTestId("building-grid"));
+    fireEvent.click(screen.getByTestId("spatial-track"));
     expect(screen.queryByRole("region", { name: "BBC Learning English 详情" })).not.toBeInTheDocument();
   });
 });

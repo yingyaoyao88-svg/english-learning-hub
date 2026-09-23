@@ -1,11 +1,12 @@
 "use client";
 import { Search, SlidersHorizontal, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import { BuildingResourceCard } from "./building-resource-card";
+import { SpatialResourceTrack } from "./spatial-resource-track";
 import { filterResources } from "@/lib/resources/filter";
 import type { Resource, ResourceCategory, ResourceLevel, PriceType } from "@/lib/resources/types";
 
 const categories: [ResourceCategory | "all", string][] = [["all","全部"],["general","综合"],["listening","听力"],["speaking","口语"],["reading","阅读"],["writing","写作"],["vocabulary-grammar","词汇语法"],["business","职场"],["ielts","雅思"],["toefl","托福"],["github-skills","GitHub Skills"]];
+const categoryLabel = Object.fromEntries(categories) as Record<ResourceCategory | "all", string>;
 
 export function ResourceDirectory({ resources }: { resources: Resource[] }) {
   const [allResources, setAllResources] = useState(resources); const [query, setQuery] = useState(""); const [category, setCategory] = useState<ResourceCategory | "all">("all"); const [level, setLevel] = useState<ResourceLevel | "all">("all"); const [price, setPrice] = useState<PriceType | "all">("all"); const [showFilters, setShowFilters] = useState(false); const [expandedResourceId, setExpandedResourceId] = useState<string | null>(null);
@@ -20,6 +21,6 @@ export function ResourceDirectory({ resources }: { resources: Resource[] }) {
     </div>
     <div id="resources" className="mt-9 flex flex-wrap items-center justify-between gap-4"><div><p className="text-sm font-semibold uppercase tracking-[.14em] text-accent">资源目录</p><h2 className="font-editorial mt-1 text-3xl">{filtered.length} 个学习网站</h2></div><button type="button" onClick={()=>setShowFilters(!showFilters)} className="category-pill flex items-center gap-2"><SlidersHorizontal className="h-4 w-4"/>更多筛选</button></div>
     {showFilters&&<div className="mt-4 flex flex-wrap gap-3 rounded-2xl border border-border bg-card p-4"><label className="text-sm font-semibold">水平 <select value={level} onChange={(e)=>setLevel(e.target.value as ResourceLevel|"all")} className="ml-2 rounded-lg border border-border bg-white p-2"><option value="all">不限</option><option value="beginner">入门</option><option value="intermediate">中级</option><option value="advanced">高级</option></select></label><label className="text-sm font-semibold">价格 <select value={price} onChange={(e)=>setPrice(e.target.value as PriceType|"all")} className="ml-2 rounded-lg border border-border bg-white p-2"><option value="all">不限</option><option value="free">免费</option><option value="freemium">部分免费</option><option value="paid">付费</option></select></label><button type="button" onClick={clear} className="ml-auto flex items-center gap-1 text-sm font-bold"><X className="h-4 w-4"/>清除筛选</button></div>}
-    {filtered.length?<div data-testid="building-grid" onClick={()=>setExpandedResourceId(null)} className="building-grid mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">{filtered.map((resource)=><BuildingResourceCard key={resource.id} resource={resource} expanded={expandedResourceId===resource.id} onToggle={()=>setExpandedResourceId((current)=>current===resource.id?null:resource.id)}/>)}</div>:<div className="mt-6 rounded-3xl border border-dashed border-border bg-card p-12 text-center"><h3 className="text-xl font-bold">没有找到匹配的资源</h3><p className="mt-2 text-muted-foreground">换个关键词，或者清除筛选条件试试。</p><button type="button" onClick={clear} className="mt-5 rounded-xl bg-primary px-4 py-2 text-sm font-bold text-primary-foreground">清除筛选</button></div>}
+    {filtered.length?<SpatialResourceTrack resources={filtered} categoryLabel={categoryLabel[category]} expandedResourceId={expandedResourceId} onToggle={(id)=>setExpandedResourceId((current)=>current===id?null:id)} onDismiss={()=>setExpandedResourceId(null)}/>:<div className="mt-6 rounded-3xl border border-dashed border-border bg-card p-12 text-center"><h3 className="text-xl font-bold">没有找到匹配的资源</h3><p className="mt-2 text-muted-foreground">换个关键词，或者清除筛选条件试试。</p><button type="button" onClick={clear} className="mt-5 rounded-xl bg-primary px-4 py-2 text-sm font-bold text-primary-foreground">清除筛选</button></div>}
   </>;
 }
