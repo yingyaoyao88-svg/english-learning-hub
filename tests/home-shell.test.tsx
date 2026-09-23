@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import Home from "@/app/page";
 
@@ -14,7 +14,8 @@ describe("home shell", () => {
       "/submit",
     );
     expect(screen.getByRole("searchbox", { name: "搜索学习资源" })).toBeVisible();
-    expect(screen.getByRole("link", { name: /访问 BBC Learning English/ })).toHaveAttribute(
+    fireEvent.click(screen.getByRole("button", { name: "查看 BBC Learning English" }));
+    expect(screen.getByRole("link", { name: /进入 BBC Learning English/ })).toHaveAttribute(
       "rel",
       "noopener noreferrer",
     );
