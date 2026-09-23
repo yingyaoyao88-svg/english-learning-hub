@@ -1,7 +1,7 @@
 import type { Resource, ResourceCategory, ResourceLevel, PriceType } from "./types";
 
 const now = "2026-09-11T00:00:00.000Z";
-const make = (id: string, name: string, url: string, description: string, category: ResourceCategory, skills: string[], level: ResourceLevel, priceType: PriceType): Resource => ({ id, name, url, normalizedUrl: url.replace(/\/$/, ""), description, category, skills, level, priceType, recommendation: description, status: "published", createdAt: now, updatedAt: now, publishedAt: now });
+const make = (id: string, name: string, url: string, description: string, category: ResourceCategory, skills: string[], level: ResourceLevel, priceType: PriceType, sourceUpdatedAt?: string): Resource => ({ id, name, url, normalizedUrl: url.replace(/\/$/, ""), description, category, skills, level, priceType, recommendation: description, status: "published", sourceUpdatedAt, createdAt: now, updatedAt: now, publishedAt: now });
 
 export const curatedResources: Resource[] = [
   make("bbc", "BBC Learning English", "https://www.bbc.co.uk/learningenglish", "新闻、短视频和系列课程兼备，适合持续训练真实英语听力与表达。", "listening", ["听力", "口语"], "intermediate", "free"),
@@ -22,4 +22,9 @@ export const curatedResources: Resource[] = [
   make("ielts-simon", "IELTS Simon", "https://www.ielts-simon.com", "以简洁示范拆解雅思写作与口语思路，适合长期跟练。", "ielts", ["雅思", "写作"], "intermediate", "freemium"),
   make("ets-toefl", "ETS TOEFL", "https://www.ets.org/toefl", "托福考试官方信息、题型说明和备考资源的权威入口。", "toefl", ["托福", "官方"], "intermediate", "freemium"),
   make("tst-prep", "TST Prep TOEFL", "https://tstprep.com", "通过课程、练习和策略讲解覆盖托福四科备考。", "toefl", ["托福", "备考"], "intermediate", "freemium"),
+  make("github-english-coach", "English Coach", "https://github.com/tianmind-studio/english-coach", "通过真实英语对话、即时纠错和微课程持续练习，适合希望把 AI 变成日常英语教练的成人学习者。", "github-skills", ["AI Skill", "对话", "纠错"], "all", "free", "2026-08-19"),
+  make("github-ielts-buddy", "IELTS Buddy", "https://github.com/Jobo16/ielts-buddy", "一组覆盖雅思学习计划、作文批改、口语陪练、听读复盘、词汇与模考复盘的 Agent Skills。", "github-skills", ["AI Skill", "雅思", "备考"], "intermediate", "free", "2026-09-10"),
+  make("github-speaking-partner-nyc", "English Speaking Partner NYC", "https://github.com/archisf/learn_english", "让 AI 扮演自然的纽约英语对话伙伴，在聊天中提供轻量纠错、词汇升级和持续追问。", "github-skills", ["AI Skill", "口语", "情景对话"], "all", "free", "2026-04-18"),
+  make("github-speaking-coach", "English Speaking Coach", "https://github.com/luyou666/english-speaking-coach", "面向中文学习者的低压力分级口语陪练，可根据水平调整难度，并控制每轮纠错数量。", "github-skills", ["AI Skill", "口语", "中文友好"], "all", "free", "2026-06-03"),
+  make("github-reword-vocab", "Reword Vocabulary Builder", "https://github.com/ymuromcev/reword-vocab-builder", "从主题或本地资料生成可导入 Reword 的英语词汇 CSV，并依据既有学习记录自动去重。", "github-skills", ["AI Skill", "词汇", "闪卡"], "intermediate", "free", "2026-07-22"),
 ];

@@ -5,7 +5,7 @@ import { ResourceCard } from "./resource-card";
 import { filterResources } from "@/lib/resources/filter";
 import type { Resource, ResourceCategory, ResourceLevel, PriceType } from "@/lib/resources/types";
 
-const categories: [ResourceCategory | "all", string][] = [["all","全部"],["general","综合"],["listening","听力"],["speaking","口语"],["reading","阅读"],["writing","写作"],["vocabulary-grammar","词汇语法"],["business","职场"],["ielts","雅思"],["toefl","托福"]];
+const categories: [ResourceCategory | "all", string][] = [["all","全部"],["general","综合"],["listening","听力"],["speaking","口语"],["reading","阅读"],["writing","写作"],["vocabulary-grammar","词汇语法"],["business","职场"],["ielts","雅思"],["toefl","托福"],["github-skills","GitHub Skills"]];
 
 export function ResourceDirectory({ resources }: { resources: Resource[] }) {
   const [allResources, setAllResources] = useState(resources); const [query, setQuery] = useState(""); const [category, setCategory] = useState<ResourceCategory | "all">("all"); const [level, setLevel] = useState<ResourceLevel | "all">("all"); const [price, setPrice] = useState<PriceType | "all">("all"); const [showFilters, setShowFilters] = useState(false);

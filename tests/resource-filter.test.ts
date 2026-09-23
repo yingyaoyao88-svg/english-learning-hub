@@ -10,4 +10,14 @@ describe("resource filtering", () => {
   it("returns no items when filters do not match", () => {
     expect(filterResources(curatedResources, { query: "不存在的资源", category: "all", level: "all", price: "all" })).toEqual([]);
   });
+  it("returns the current GitHub English-learning skills", () => {
+    const result = filterResources(curatedResources, { query: "", category: "github-skills", level: "all", price: "all" });
+    expect(result.map((item) => item.name)).toEqual([
+      "English Coach",
+      "IELTS Buddy",
+      "English Speaking Partner NYC",
+      "English Speaking Coach",
+      "Reword Vocabulary Builder",
+    ]);
+  });
 });
