@@ -2,6 +2,7 @@
 
 import type { CSSProperties } from "react";
 import { useEffect, useRef, useState } from "react";
+import { ResourceFlashcard } from "@/components/resource-flashcard";
 import { SpatialResourceCard } from "@/components/spatial-resource-card";
 import { spatialProgress } from "@/lib/resources/spatial";
 import type { Resource } from "@/lib/resources/types";
@@ -41,6 +42,7 @@ export function SpatialResourceTrack({ resources, categoryLabel, expandedResourc
   const height = `calc(100vh + ${Math.max(resources.length - 1, 0)} * 68vh)`;
   const style = { height, "--track-progress": String(progress) } as CSSProperties;
   const current = Math.min(resources.length, Math.round(progress) + 1);
+  const selectedResource = resources.find((resource) => resource.id === expandedResourceId);
 
   return <div ref={trackRef} data-testid="spatial-track" className="spatial-track" style={style} onClick={onDismiss}>
     <div className="spatial-stage">
@@ -59,6 +61,9 @@ export function SpatialResourceTrack({ resources, categoryLabel, expandedResourc
           onToggle={() => onToggle(resource.id)}
         />)}
       </div>
+      {selectedResource && <div className="spatial-side-panel" onClick={(event) => event.stopPropagation()}>
+        <ResourceFlashcard resource={selectedResource} panelId={`resource-panel-${selectedResource.id}`}/>
+      </div>}
       <p className="spatial-stage-hint">资源进入中央时成为焦点。继续滚动切换，或点击当前卡片查看详情。</p>
     </div>
   </div>;

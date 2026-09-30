@@ -2,7 +2,6 @@
 
 import type { CSSProperties } from "react";
 import { useRef } from "react";
-import { ResourceFlashcard } from "@/components/resource-flashcard";
 import type { Resource } from "@/lib/resources/types";
 
 const palettes = [
@@ -62,6 +61,5 @@ export function SpatialResourceCard({ resource, index, position, expanded, onTog
       <span className="spatial-resource-description">{resource.description}</span>
       <span className="spatial-resource-meta"><span>{resource.skills.slice(0, 2).join(" · ")}</span><span>{price[resource.priceType]} · 查看详情 ↗</span></span>
     </button>
-    {expanded && <ResourceFlashcard resource={resource} panelId={panelId}/>} 
   </article>;
 }

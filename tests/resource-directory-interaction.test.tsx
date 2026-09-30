@@ -15,6 +15,18 @@ describe("ResourceDirectory spatial interactions", () => {
     expect(screen.getByRole("region", { name: "VOA Learning English 详情" })).toBeVisible();
   });
 
+  it("renders the selected website as an independent side panel with an external link", () => {
+    render(<ResourceDirectory resources={curatedResources.slice(0, 1)} />);
+    fireEvent.click(screen.getByRole("button", { name: "查看 BBC Learning English" }));
+
+    const panel = screen.getByRole("region", { name: "BBC Learning English 详情" });
+    expect(panel.closest('[data-testid="spatial-resource-card"]')).toBeNull();
+    expect(screen.getByRole("link", { name: "进入 BBC Learning English" })).toHaveAttribute(
+      "href",
+      curatedResources[0].url,
+    );
+  });
+
   it("closes open details when the search changes", () => {
     render(<ResourceDirectory resources={curatedResources.slice(0, 2)} />);
     fireEvent.click(screen.getByRole("button", { name: "查看 BBC Learning English" }));
