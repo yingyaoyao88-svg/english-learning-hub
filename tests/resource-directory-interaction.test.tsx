@@ -7,6 +7,11 @@ vi.stubGlobal("fetch", vi.fn(() => Promise.reject(new Error("offline"))));
 afterEach(cleanup);
 
 describe("ResourceDirectory spatial interactions", () => {
+  it("lets the current card receive pointer input through the 3D rail", () => {
+    const { container } = render(<ResourceDirectory resources={curatedResources.slice(0, 2)} />);
+    expect(container.querySelector(".spatial-card-rail")).toHaveStyle({ pointerEvents: "none" });
+  });
+
   it("keeps only the most recently selected website open", () => {
     render(<ResourceDirectory resources={curatedResources.slice(0, 2)} />);
     fireEvent.click(screen.getByRole("button", { name: "查看 BBC Learning English" }));

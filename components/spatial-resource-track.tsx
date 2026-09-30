@@ -51,7 +51,7 @@ export function SpatialResourceTrack({ resources, categoryLabel, expandedResourc
       <div className="spatial-stage-counter">{String(current).padStart(2, "0")} / {String(resources.length).padStart(2, "0")}</div>
       <div className="spatial-orbit" aria-hidden="true"/>
       <div className="spatial-category-word" aria-hidden="true">{categoryLabel}</div>
-      <div className="spatial-card-rail">
+      <div className="spatial-card-rail" style={{ pointerEvents: "none" }}>
         {resources.map((resource, index) => <SpatialResourceCard
           key={resource.id}
           resource={resource}
