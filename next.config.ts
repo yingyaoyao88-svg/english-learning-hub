@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 import path from "node:path";
 
 const nextConfig: NextConfig = {
+  basePath: "/english",
   webpack(config, { webpack }) {
     config.plugins.push(
       new webpack.NormalModuleReplacementPlugin(

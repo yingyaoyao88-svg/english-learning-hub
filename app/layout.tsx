@@ -5,8 +5,8 @@ export const metadata: Metadata = {
   title: "英语学习导航 | 成人自学资源库",
   description: "为成人英语自学者整理的优质学习网站，覆盖听说读写、职场英语、雅思与托福。",
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: "/english/favicon.svg",
+    shortcut: "/english/favicon.svg",
   },
 };
 
