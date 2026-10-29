@@ -11,7 +11,7 @@ describe("home shell", () => {
     ).toBeVisible();
     expect(screen.getByRole("link", { name: "推荐网站" })).toHaveAttribute(
       "href",
-      "/submit",
+      "https://adult-english-learning-hub.yingyaoyao88.chatgpt.site/submit",
     );
     expect(screen.getByRole("searchbox", { name: "搜索学习资源" })).toBeVisible();
     fireEvent.click(screen.getByRole("button", { name: "查看 BBC Learning English" }));
