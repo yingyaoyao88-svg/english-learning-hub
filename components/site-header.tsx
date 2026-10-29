@@ -10,7 +10,7 @@ export function SiteHeader() {
         </a>
         <div className="flex items-center gap-3">
           <a href="#resources" className="hidden text-sm font-semibold text-muted-foreground transition hover:text-foreground sm:inline-flex">浏览资源</a>
-          <a href="https://adult-english-learning-hub.yingyaoyao88.chatgpt.site/submit" className="rounded-xl bg-accent px-4 py-2.5 text-sm font-bold text-accent-foreground shadow-[0_5px_0_var(--accent-deep)] transition hover:-translate-y-0.5 hover:shadow-[0_7px_0_var(--accent-deep)] active:translate-y-1 active:shadow-none">推荐网站</a>
+          <a href="https://adult-english-learning-hub.yingyaoyao88.chatgpt.site/submit" target="_blank" rel="noopener noreferrer" className="rounded-xl bg-accent px-4 py-2.5 text-sm font-bold text-accent-foreground shadow-[0_5px_0_var(--accent-deep)] transition hover:-translate-y-0.5 hover:shadow-[0_7px_0_var(--accent-deep)] active:translate-y-1 active:shadow-none">推荐网站</a>
         </div>
       </nav>
     </header>
